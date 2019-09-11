@@ -2,12 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Survey{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/bootstrap.min.css') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
+        <script src="{{asset('bundles/app/js/jquery-3.4.1.min.js')}}">          
+        </script>
         {% block javascripts %}{% endblock %}
+        
     </body>
 </html>
