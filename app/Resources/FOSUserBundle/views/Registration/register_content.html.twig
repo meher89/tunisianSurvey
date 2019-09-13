@@ -1,0 +1,12 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    <div class="card row align-items-center justify-content-center" >
+  <img src="{{asset('bundles/app/img/icon.ico')}}" class="card-img-top" style="width: 16rem;">
+  <div class="card-body">
+       {{ form_widget(form) }}
+       <button type="submit" class="btn btn-primary" >{{ 'registration.submit'|trans }}</button>
+    </div>
+    </div>
+    
+{{ form_end(form) }}
