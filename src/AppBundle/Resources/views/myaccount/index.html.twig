@@ -13,17 +13,21 @@
         <a class="nav-link" href="{{path('homepage')}}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link" href="#">Profile</a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link " href="#">Demo</a>
+        <a class="nav-link " href="#">New Survey</a>
       </li>
     </ul>
-    <div class="form-inline my-2 my-lg-0">
-      <a class="btn btn-outline-light my-2 my-sm-0" href="{{path('fos_user_registration_register')}}">Register</a>
-      <a class="btn btn-outline-light my-2 my-sm-0" href="{{path('fos_user_security_login')}}">Login</a>
-      
+    <div class="form-inline my-2 my-lg-0">     
+      <a  class="btn btn-outline-light my-2 my-sm-0">
+          <i class="fa fa-user" aria-hidden="true"></i> {{app.user.username}} 
+        </a>      
+       <a class="btn btn-outline-light my-2 my-sm-0" href="{{ path('fos_user_security_logout') }}">
+       {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+       </a>   
+     
     </div>
   </div>
 </nav>
