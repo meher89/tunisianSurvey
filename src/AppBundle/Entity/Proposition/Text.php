@@ -11,13 +11,19 @@ use AppBundle\Entity\Proposition;
 * 
 */
 class Text extends Proposition {
+
+    public const FORMATS = [
+        "Text" => "text",
+        "Number" =>"number",
+        "Date"   => "date"
+    ];
     
     /**
     * 
     * @ORM\Column(type="string")
     * 
     */
-    private $content;
+    private $format;
 
     public function getType():string 
     {
@@ -28,26 +34,26 @@ class Text extends Proposition {
     
 
     /**
-     * Set content
+     * Set format
      *
-     * @param string $content
+     * @param string $format
      *
      * @return Text
      */
-    public function setContent($content)
+    public function setFormat($format)
     {
-        $this->content = $content;
+        $this->format = $format;
 
         return $this;
     }
 
     /**
-     * Get content
+     * Get format
      *
      * @return string
      */
-    public function getContent()
+    public function getFormat()
     {
-        return $this->content;
+        return $this->format;
     }
 }

@@ -27,16 +27,21 @@ class AbstractEntity {
     protected $updatedAt;
     /**
     *
-    * @ORM\Column(type="datetime")
+    * @ORM\Column(type="boolean")
     * 
     */
-    protected $deleted;
+    protected $deleted = false;
     /**
     * 
-    * @ORM\Column(type="datetime")
+    * @ORM\Column(type="datetime",nullable=true)
     * 
     */
     protected $deletedAt;
+
+    public function __construct() {
+        $this->setCreatedAt( new \DateTime);
+        $this->setUpdatedAt( new \DateTime);
+    }
 
     /**
      * Get id

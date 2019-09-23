@@ -34,6 +34,7 @@ class Category extends AbstractEntity {
      */
     public function __construct()
     {
+        parent::__construct();
         $this->surveys = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

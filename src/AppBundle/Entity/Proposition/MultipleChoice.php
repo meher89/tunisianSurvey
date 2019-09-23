@@ -12,7 +12,7 @@ use AppBundle\Entity\Proposition;
 class MultipleChoice extends Proposition {
     
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Proposition\Choice", mappedBy="multipleChoice")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Proposition\Choice", mappedBy="multipleChoice",cascade={"persist"})
     */
     private $choices;
 
@@ -25,6 +25,7 @@ class MultipleChoice extends Proposition {
      */
     public function __construct()
     {
+        parent::__construct();
         $this->choices = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -60,5 +61,12 @@ class MultipleChoice extends Proposition {
     public function getChoices()
     {
         return $this->choices;
+    }
+
+    public function setChoices($choices) {
+        foreach( $choices as $choice) {
+            $this->addChoice($choice);
+        }
+        return $this;
     }
 }

@@ -1,0 +1,20 @@
+{% import _self as formCollectionMacros %}
+{% macro printCollection(collectionForm,name,label) %}
+{% import "@App/macro/collectionElement.html.twig" as formCollectionElementMacros %}
+    <div class="col-xs-4 item">
+    <label>{{label}} </label>    
+    {{ form_errors(collectionForm) }}        
+        <ul id="{{collectionForm.vars.id}}-fields-list"
+        data-prototype="{{ formCollectionElementMacros.printCollectionRow(collectionForm.vars.prototype)|e }}"
+        data-widget-tags="{{ '<div></div>'|e }}"
+        data-widget-counter="{{ collectionForm.children|length }}" data-full-name='{{collectionForm.vars.full_name}}' data-id="{{collectionForm.vars.id}}">
+    {% for elementField in collectionForm %}
+        {{ formCollectionElementMacros.printCollectionRow(elementField) }}        
+    {% endfor %}
+        
+        {{ form_widget(collectionForm) }}
+      <a class="btn add-collection-element" id="{{name}}-add-collection-element" data-list-selector="{{name}}-fields-list">
+           <i class="fa fa-plus" aria-hidden="true"></i>
+      </a> 
+    </div>
+{% endmacro %}

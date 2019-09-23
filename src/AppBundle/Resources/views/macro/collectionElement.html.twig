@@ -1,0 +1,14 @@
+{% import _self as formCollectionElementMacros %}
+{% macro printCollectionRow(collectionElementForm) %}
+{% import "@App/macro/recursiveRender.html.twig"  as formRecursiveRenderMacros %}
+    <div class="col-xs-4 item">
+        <a class="remove">
+            <span class="fa fa-close"></span>
+        </a>
+        {{ form_errors(collectionElementForm) }}
+        {% for elementField in collectionElementForm %}           
+            {{formRecursiveRenderMacros.renderRecurcivly(elementField)}}
+        {% endfor %}
+       
+    </div>
+{% endmacro %}

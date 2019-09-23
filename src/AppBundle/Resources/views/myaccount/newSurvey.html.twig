@@ -1,0 +1,83 @@
+{% extends '@App/myaccount/index.html.twig' %}
+{% import "@App/macro/recursiveRender.html.twig"  as formRecursiveRenderMacros %}
+{% block content %}
+   {% form_theme form 'bootstrap_4_layout.html.twig' %}
+   {{ form_start(form) }} 
+     {% for child in form %} 
+         {{ formRecursiveRenderMacros.renderRecurcivly(child)}}
+     {% endfor %}
+     <button class ="btn" >Save </button>
+{{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+<script>
+jQuery(document).ready(function () {
+    jQuery("#survey_questions").on('click', '.remove', function(e) {
+            e.preventDefault();
+            $(this).closest('.item')
+                .fadeOut()
+                .remove();
+        });
+let buttons = [];
+    jQuery('.add-collection-element').click(function (e) {
+        
+        buttons.push(this);
+        var list = jQuery(this).parent();        
+        // Try to find the counter of the list or use the length of the list
+        var counter = list.data('widget-counter') ||jQuery("div:first",list).children().length;
+
+        // grab the prototype template
+        var newWidget = list.attr('data-prototype');
+        console.log(list.data('full-name'));
+        let regex1 = new RegExp((list.data('full-name')+"[__name__]").replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), "g");
+        newWidget = newWidget.replace(regex1,list.data('full-name')+"["+counter+"]");
+        let regex = new RegExp(list.data('id')+'___name__', "g");
+        newWidget = newWidget.replace(regex,list.data('id')+"_"+counter);
+        
+        // Increase the counter
+        counter++;
+        // And store it, the length cannot be used if deleting widgets is allowed
+        list.data('widget-counter', counter);
+        
+        // create a new list element and add it to the list
+        var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+        newElem.appendTo(jQuery("div:first",list));
+        
+         jQuery('.add-collection-element').each(function() {
+             if(jQuery.inArray( this, buttons )>=0) {
+                 return;
+             }
+             buttons.push(this);             
+             jQuery(this).click(function (e) {
+        
+                    var list = jQuery(this).parent();        
+                    // Try to find the counter of the list or use the length of the list
+                    var counter = list.data('widget-counter') || jQuery("div:first",list).children().length;
+
+                    // grab the prototype template
+                    var newWidget = list.attr('data-prototype');
+                    // replace the "__name__" used in the id and name of the prototype
+                    // with a number that's unique to your emails
+                    // end name attribute looks like name="contact[emails][2]"
+                    
+                    let regex1 = new RegExp((list.data('full-name')+"[__name__]").replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), "g");
+                    newWidget = newWidget.replace(regex1,list.data('full-name')+"["+counter+"]");
+                    let regex = new RegExp(list.data('id')+'___name__', "g");
+                    newWidget = newWidget.replace(regex,list.data('id')+"_"+counter);
+                    // Increase the counter
+                    counter++;
+                    // And store it, the length cannot be used if deleting widgets is allowed
+                    list.data('widget-counter', counter);
+                    
+                    // create a new list element and add it to the list
+                    var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+                    newElem.appendTo(jQuery("div:first",list));
+                }); 
+    });
+    });
+    
+});
+
+</script>
+
+{% endblock %}

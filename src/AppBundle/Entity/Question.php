@@ -23,7 +23,7 @@ class Question extends AbstractEntity {
     private $survey;
     
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Proposition")     
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Proposition",cascade={"persist"})     
     */
     private $proposition;
 
@@ -84,7 +84,7 @@ class Question extends AbstractEntity {
      *
      * @return Question
      */
-    public function setProposition(\AppBundle\Entity\PropositionInterface $proposition = null)
+    public function setProposition(\AppBundle\Entity\Proposition $proposition = null)
     {
         $this->proposition = $proposition;
 

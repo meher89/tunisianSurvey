@@ -1,0 +1,17 @@
+{% import _self as formRecursiveRenderMacros %}
+{% macro renderRecurcivly(form) %}
+{% import "@App/macro/collection.html.twig" as formCollectionMacros %}
+{% if form.vars.prototype is defined %}
+  
+    {{formCollectionMacros.printCollection(form,form.vars.name,form.vars.label)}} 
+{% else %} 
+
+    {% if form.children|length > 0 %}
+        {% for child in form %}
+            {{ _self.renderRecurcivly(child) }} 
+        {% endfor %}
+    {% else %} 
+            {{form_row(form)}}
+    {% endif %}
+{% endif %}
+{% endmacro %}

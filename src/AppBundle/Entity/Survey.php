@@ -18,7 +18,7 @@ class Survey extends AbstractEntity {
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Question", mappedBy="survey",cascade={"persist"})
     */
     private $questions;
     
@@ -37,6 +37,7 @@ class Survey extends AbstractEntity {
      */
     public function __construct()
     {
+        parent::__construct();
         $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -73,10 +74,15 @@ class Survey extends AbstractEntity {
      */
     public function addQuestion(\AppBundle\Entity\Question $question)
     {
+        
+        
         $this->questions[] = $question;
         $question->setSurvey($this);
+            
         return $this;
     }
+
+    
 
     /**
      * Remove question
@@ -94,7 +100,8 @@ class Survey extends AbstractEntity {
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getQuestions()
-    {
+    {   
+        
         return $this->questions;
     }
 
